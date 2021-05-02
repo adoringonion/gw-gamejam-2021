@@ -2,22 +2,22 @@
 {
     public class ScoreInteractor
     {
-        private ScoreRepository _scoreRepository;
+        private readonly ScoreRepository scoreRepository;
         private const int KillPoint = 10;
 
         public ScoreInteractor()
         {
-            _scoreRepository = new ScoreRepository();
+            scoreRepository = new ScoreRepository();
         }
 
-        public void addScoreWhenEnemyKilled()
+        public void AddScoreWhenEnemyKilled()
         {
-            _scoreRepository.InmemoryScore = _scoreRepository.InmemoryScore.add(KillPoint);
+            scoreRepository.InmemoryScore = scoreRepository.InmemoryScore.Add(KillPoint);
         }
 
         public int ScoreForView()
         {
-           return _scoreRepository.InmemoryScore.Value;
+           return scoreRepository.InmemoryScore.Value;
         }
     }
 }

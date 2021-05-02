@@ -4,27 +4,27 @@ namespace gw_game_jam.Scripts
 {
     public class ScoreController : MonoBehaviour
     {
-        private ScoreInteractor _scoreInteractor;
+        private ScoreInteractor scoreInteractor;
         
         [SerializeField]
-        public int currentScore;
+        private int currentScore;
         
         private void Awake()
         {
-            _scoreInteractor = new ScoreInteractor();
+            scoreInteractor = new ScoreInteractor();
         }
 
         private void Update()
         {
             ScoreInputTest();
-            currentScore = _scoreInteractor.ScoreForView();
+            currentScore = scoreInteractor.ScoreForView();
         }
 
         private void ScoreInputTest()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _scoreInteractor.addScoreWhenEnemyKilled();
+                scoreInteractor.AddScoreWhenEnemyKilled();
             }
         }
     }

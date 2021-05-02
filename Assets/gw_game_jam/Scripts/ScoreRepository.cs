@@ -6,7 +6,7 @@
 
         public ScoreRepository()
         {
-            this.InmemoryScore = new Score(0);
+            InmemoryScore = new Score(0);
         }
 
     }
