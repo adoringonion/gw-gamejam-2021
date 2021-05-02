@@ -1,5 +1,29 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &8956460394231944975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2748314430165126847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 953657c31cfa5e54384f9440c3d4553d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1304555612408650650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620713639995311347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 953657c31cfa5e54384f9440c3d4553d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3961877684092184788
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,6 +183,11 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 984704fb92e021e4fb85b963601840b3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cabad5990e36e9b4ba022717412f52e5, type: 3}
+--- !u!1 &3620713639995311347 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7327056001003020347, guid: cabad5990e36e9b4ba022717412f52e5, type: 3}
+  m_PrefabInstance: {fileID: 6310023854512727240}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3620713639995025697 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7327056001002655209, guid: cabad5990e36e9b4ba022717412f52e5, type: 3}
@@ -221,7 +250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3840679566258319894, guid: d798198daa66a524ca66eef11fe6a7b7, type: 3}
       propertyPath: m_Name
-      value: Zombie_A
+      value: Zombie_0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d798198daa66a524ca66eef11fe6a7b7, type: 3}
@@ -291,6 +320,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 928b4cda41a5c204390f03b69fb74ad2, type: 3}
+--- !u!1 &2748314430165126847 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5629924590247277798, guid: 928b4cda41a5c204390f03b69fb74ad2, type: 3}
+  m_PrefabInstance: {fileID: 7494689067947162201}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2748314430165384277 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5629924590246954508, guid: 928b4cda41a5c204390f03b69fb74ad2, type: 3}
