@@ -8,4 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/gw_game_jam/Scenes/Main.unity
     guid: 0b24efba42ceccb42b9c779009617b0e
-  m_configObjects: {}
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: a3b0216cafaca2744a241acc12acc3a8, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: c1088427a2c9cfc40b423b038b100241, type: 2}
