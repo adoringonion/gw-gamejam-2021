@@ -1,13 +1,13 @@
+using System;
 using UnityEngine;
 
 namespace gw_game_jam.Scripts
 {
     public class ScoreController : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        private void Awake()
         {
-        
+            
         }
 
         // Update is called once per frame
