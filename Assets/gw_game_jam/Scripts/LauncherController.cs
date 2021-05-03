@@ -5,7 +5,9 @@ namespace gw_game_jam.Scripts
     public class LauncherController : MonoBehaviour
     {
         [SerializeField] private GameObject shark;
-        // Start is called before the first frame update
+        [SerializeField] private GameObject launchPoint;
+        
+        
         private void Start()
         {
         
@@ -21,8 +23,15 @@ namespace gw_game_jam.Scripts
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                //TODO: 発射するスクリプト
+                LaunchShark();
             }
+        }
+
+        private void LaunchShark()
+        {
+            GameObject instantiateShark = Instantiate(shark);
+            instantiateShark.transform.position = launchPoint.transform.position;
+            instantiateShark.GetComponent<Rigidbody>().AddForce(launchPoint.transform.forward * 1000f);
         }
     }
 }
