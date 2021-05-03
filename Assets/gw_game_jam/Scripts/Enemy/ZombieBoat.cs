@@ -12,6 +12,9 @@ namespace gw_game_jam.Enemy
     [RequireComponent(typeof(NavMeshAgent))]
     public class ZombieBoat : MonoBehaviour
     {
+        // お試し.
+        [SerializeField] private Transform startPos;
+        [SerializeField] private Transform endPos;
         
         
         private NavMeshAgent agent;
@@ -19,7 +22,8 @@ namespace gw_game_jam.Enemy
         
         void Start()
         {
-        
+            agent = GetComponent<NavMeshAgent>();
+            agent.SetDestination(endPos.position);
         }
 
         
