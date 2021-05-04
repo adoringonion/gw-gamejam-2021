@@ -6,8 +6,6 @@ namespace gw_game_jam.Scripts.SharkLauncher
     {
         [SerializeField] private GameObject shark;
         [SerializeField] private GameObject launchPoint;
-        private const float LaunchSpeed = 10000f;
-        
         
         private void Update()
         {
@@ -25,7 +23,7 @@ namespace gw_game_jam.Scripts.SharkLauncher
         private void LaunchShark()
         {
             GameObject instantiateShark = Instantiate(shark, launchPoint.transform.position, launchPoint.transform.rotation);
-            instantiateShark.GetComponent<Rigidbody>().AddForce(launchPoint.transform.forward * LaunchSpeed);
+            instantiateShark.GetComponent<Rigidbody>().AddForce(launchPoint.transform.forward * 10, ForceMode.Impulse);
         }
     }
 }
