@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GWGameJam
+namespace gw_game_jam.Enemy
 {
     /// <summary>
     /// ゾンビ乗組員.
