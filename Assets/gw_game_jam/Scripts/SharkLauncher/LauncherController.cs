@@ -6,6 +6,7 @@ namespace gw_game_jam.Scripts
     {
         [SerializeField] private GameObject shark;
         [SerializeField] private GameObject launchPoint;
+        private const float LAUNCH_SPEED = 10000f;
         
         
         private void Start()
@@ -31,7 +32,7 @@ namespace gw_game_jam.Scripts
         {
             GameObject instantiateShark = Instantiate(shark);
             instantiateShark.transform.position = launchPoint.transform.position;
-            instantiateShark.GetComponent<Rigidbody>().AddForce(launchPoint.transform.forward * 1000f);
+            instantiateShark.GetComponent<Rigidbody>().AddForce(launchPoint.transform.forward * LAUNCH_SPEED);
         }
     }
 }
