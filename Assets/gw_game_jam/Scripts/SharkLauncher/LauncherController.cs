@@ -1,20 +1,14 @@
 using UnityEngine;
 
-namespace gw_game_jam.Scripts
+namespace gw_game_jam.Scripts.SharkLauncher
 {
     public class LauncherController : MonoBehaviour
     {
         [SerializeField] private GameObject shark;
         [SerializeField] private GameObject launchPoint;
-        private const float LAUNCH_SPEED = 10000f;
+        private const float LaunchSpeed = 10000f;
         
         
-        private void Start()
-        {
-        
-        }
-
-        // Update is called once per frame
         private void Update()
         {
             TestInput();
@@ -30,9 +24,8 @@ namespace gw_game_jam.Scripts
 
         private void LaunchShark()
         {
-            GameObject instantiateShark = Instantiate(shark);
-            instantiateShark.transform.position = launchPoint.transform.position;
-            instantiateShark.GetComponent<Rigidbody>().AddForce(launchPoint.transform.forward * LAUNCH_SPEED);
+            GameObject instantiateShark = Instantiate(shark, launchPoint.transform.position, launchPoint.transform.rotation);
+            instantiateShark.GetComponent<Rigidbody>().AddForce(launchPoint.transform.forward * LaunchSpeed);
         }
     }
 }

@@ -13,14 +13,5 @@ namespace gw_game_jam.Scripts.SharkLauncher
                 Destroy(gameObject);
             } );
         }
-
-        void Update()
-        {
-        
-        }
-
-        private void DestroyWhen()
-        {
-        }
     }
 }
