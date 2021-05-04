@@ -1,8 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+using UniRx;
+using Random = UnityEngine.Random;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 
 namespace gw_game_jam.Enemy
 {
@@ -11,7 +16,7 @@ namespace gw_game_jam.Enemy
     /// </summary>
     public class ZombieBoatSpawner : MonoBehaviour
     {
-
+        [SerializeField] private GameObject zombieBoatPrefab;
         [SerializeField] private Transform startPos;
         [SerializeField] private Transform[] firstTargetPosList;
         [SerializeField] private Transform[] secondTargetPosList;
@@ -21,6 +26,18 @@ namespace gw_game_jam.Enemy
         
         void Start()
         {
+            Observable.Interval(TimeSpan.FromSeconds(1)).Subscribe(_ =>
+            {
+                var obj = Instantiate(zombieBoatPrefab);
+                obj.transform.SetPositionAndRotation(startPos.position, Quaternion.identity);
+
+                var queue = new Queue<Vector3>();
+                queue.Enqueue(startPos.position);
+                queue.Enqueue(firstTargetPosList[Random.Range(0, firstTargetPosList.Length)].position);
+                queue.Enqueue(secondTargetPosList[Random.Range(0, secondTargetPosList.Length)].position);
+                queue.Enqueue(endTargetPos.position);
+                obj.GetComponent<ZombieBoat>().SetTargetPositions(queue);
+            });
         }
         
         

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,24 +13,42 @@ namespace gw_game_jam.Enemy
     [RequireComponent(typeof(NavMeshAgent))]
     public class ZombieBoat : MonoBehaviour
     {
-        // お試し.
-        [SerializeField] private Transform startPos;
-        [SerializeField] private Transform endPos;
-        
-        
+        private const float NextTargetChangeDistance = 3f;
+
+
+        private Queue<Vector3> targetPositions;
         private NavMeshAgent agent;
-  
         
-        void Start()
+        
+        private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
-            agent.SetDestination(endPos.position);
+            agent.enabled = false;
         }
 
         
-        void Update()
+        private void Update()
         {
-        
+            if (agent.remainingDistance <= NextTargetChangeDistance)
+            {
+                if (0 < targetPositions.Count)
+                {
+                    agent.SetDestination(targetPositions.Dequeue());
+                }
+                else
+                {
+                    Destroy(gameObject);
+                }
+            }
+        }
+
+
+        public void SetTargetPositions(
+            Queue<Vector3> positions)
+        {
+            targetPositions = positions;
+            agent.enabled = true;
+            agent.SetDestination(targetPositions.Dequeue());
         }
     }
 }
