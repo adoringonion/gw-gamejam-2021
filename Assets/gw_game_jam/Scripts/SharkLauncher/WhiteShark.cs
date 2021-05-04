@@ -9,9 +9,8 @@ namespace gw_game_jam.Scripts.SharkLauncher
         void Start()
         {
             Observable.Interval(TimeSpan.FromSeconds(3)).Subscribe(_ =>
-            {
-                Destroy(gameObject);
-            } );
+                Destroy(gameObject)
+            ).AddTo(this);
         }
     }
 }
