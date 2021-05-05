@@ -1,3 +1,4 @@
+using System;
 using UniRx;
 using UnityEngine;
 
@@ -8,19 +9,13 @@ namespace gw_game_jam.Scripts.SharkLauncher
         [SerializeField] private WhiteShark shark;
         [SerializeField] private GameObject launchPoint;
         [SerializeField] private ScoreController scoreController = ScoreController.instance;
-        
-        private void Update()
+
+        private void Awake()
         {
-            TestInput();
+            Observable.EveryUpdate().Where(_ => Input.GetKeyDown(KeyCode.Space))
+                .ThrottleFirst(TimeSpan.FromSeconds(0.5)).Subscribe(_ =>  LaunchShark());
         }
 
-        private void TestInput()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                LaunchShark();
-            }
-        }
 
         private void LaunchShark()
         {
