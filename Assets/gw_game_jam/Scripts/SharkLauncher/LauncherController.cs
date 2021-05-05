@@ -7,6 +7,7 @@ namespace gw_game_jam.Scripts.SharkLauncher
     {
         [SerializeField] private WhiteShark shark;
         [SerializeField] private GameObject launchPoint;
+        [SerializeField] private ScoreController scoreController = ScoreController.instance;
         
         private void Update()
         {
