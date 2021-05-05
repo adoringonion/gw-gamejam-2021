@@ -8,6 +8,11 @@ namespace gw_game_jam.Scripts.SharkLauncher
     public class WhiteShark : MonoBehaviour
     {
         private Rigidbody rigidBody;
+        private readonly Subject<Unit> hitSubject = new Subject<Unit>();
+
+        public IObservable<Unit> OnHitAsync => hitSubject.Take(1);
+
+
 
         private void Awake()
         {
@@ -19,6 +24,7 @@ namespace gw_game_jam.Scripts.SharkLauncher
             gameObject.OnCollisionEnterAsObservable().Where(collision => collision.gameObject.CompareTag("ZombieBoat"))
                 .Subscribe(collision =>
                 {
+                    hitSubject.OnNext(Unit.Default);
                     Destroy(collision.gameObject);
                     Destroy(gameObject);
                 }).AddTo(this);
@@ -32,6 +38,11 @@ namespace gw_game_jam.Scripts.SharkLauncher
         public void AddForce(Vector3 vec)
         {
             rigidBody.AddForce(vec, ForceMode.Impulse);
+        }
+
+        private void OnDestroy()
+        {
+           hitSubject.Dispose(); 
         }
     }
 }

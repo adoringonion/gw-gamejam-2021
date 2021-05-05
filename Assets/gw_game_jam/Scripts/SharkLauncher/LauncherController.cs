@@ -1,3 +1,4 @@
+using UniRx;
 using UnityEngine;
 
 namespace gw_game_jam.Scripts.SharkLauncher
@@ -24,6 +25,7 @@ namespace gw_game_jam.Scripts.SharkLauncher
         {
             WhiteShark instantiateShark = Instantiate(shark, launchPoint.transform.position, launchPoint.transform.rotation);
             instantiateShark.AddForce(launchPoint.transform.forward * 10);
+            instantiateShark.OnHitAsync.Take(1).Subscribe(_ => Debug.Log("ゾンビ倒した"));
         }
     }
 }
