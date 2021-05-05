@@ -19,22 +19,33 @@ namespace gw_game_jam.Enemy
     public class ZombieBoat : MonoBehaviour
     {
         private const float NextTargetChangeDistance = 3f;
+        private const int HealthValue = 30;
+        private const int Score = 10;
 
 
         private Queue<Vector3> targetPositions;
         private NavMeshAgent agent;
-        private readonly ReactiveProperty<int> health = new ReactiveProperty<int>(30);
-        private readonly ScoreController scoreController = new ScoreController().Instance;
+        private ReactiveProperty<int> health;
+        private ScoreController scoreController;
 
 
         private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
             agent.enabled = false;
+            health = new ReactiveProperty<int>(HealthValue);
+            scoreController = gameObject.AddComponent<ScoreController>().Instance;
+            
+            // サメタグが付いたオブジェクトと衝突した場合のみ、ダメージ計算
             this.OnCollisionEnterAsObservable().Where(collision => collision.gameObject.CompareTag("Shark"))
                 .Select(collision => collision.gameObject.GetComponent<WhiteShark>())
-                .Subscribe(whiteShark => health.Value -= WhiteShark.AttackValue);
-            health.Where(value => value <= 0).Subscribe(_ => scoreController.AddScore(10));
+                .Subscribe(whiteShark => health.Value -= WhiteShark.AttackValue).AddTo(gameObject);
+            // 体力変動ごとにチェック。0以下ならDestroyしてスコア加算
+            health.Where(value => value <= 0).Subscribe(_ =>
+            {
+                scoreController.AddScore(Score);
+                Destroy(gameObject);
+            }).AddTo(gameObject);
         }
 
         

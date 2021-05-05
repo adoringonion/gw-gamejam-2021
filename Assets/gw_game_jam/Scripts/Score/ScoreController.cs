@@ -5,7 +5,7 @@ namespace gw_game_jam.Scripts.Score
 {
     public class ScoreController : MonoBehaviour
     {
-        private readonly Subject<int> scoreSubject = new Subject<int>();
+        private Subject<int> scoreSubject;
 
         private static ScoreController instance;
 
@@ -26,6 +26,7 @@ namespace gw_game_jam.Scripts.Score
 
         private void Awake()
         {
+            scoreSubject = new Subject<int>();
             scoreSubject.Subscribe(point => currentScore += point);
         }
 
