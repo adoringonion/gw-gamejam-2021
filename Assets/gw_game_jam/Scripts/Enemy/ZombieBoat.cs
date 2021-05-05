@@ -26,10 +26,6 @@ namespace gw_game_jam.Enemy
         {
             agent = GetComponent<NavMeshAgent>();
             agent.enabled = false;
-
-            gameObject.OnCollisionEnterAsObservable()
-                .Where(collision => collision.gameObject.CompareTag("Shark"))
-                .Subscribe(_ =>  Destroy(gameObject)).AddTo(this);
         }
 
         
