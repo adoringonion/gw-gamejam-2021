@@ -22,13 +22,8 @@ namespace gw_game_jam.Scripts.SharkLauncher
             WhiteShark instantiateShark =
                 Instantiate(shark, launchPoint.transform.position, launchPoint.transform.rotation);
             instantiateShark.AddForce(launchPoint.transform.forward * 10);
-            instantiateShark.OnHitAsync.Subscribe(_ => AddScore());
         }
 
         
-        private static void AddScore()
-        {
-            ScoreController.instance.scoreSubject.OnNext(10);
-        }
     }
 }

@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using gw_game_jam.Scripts.Score;
+using gw_game_jam.Scripts.SharkLauncher;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -20,12 +23,18 @@ namespace gw_game_jam.Enemy
 
         private Queue<Vector3> targetPositions;
         private NavMeshAgent agent;
-        
-        
+        private readonly ReactiveProperty<int> health = new ReactiveProperty<int>(30);
+        private readonly ScoreController scoreController = new ScoreController().Instance;
+
+
         private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
             agent.enabled = false;
+            this.OnCollisionEnterAsObservable().Where(collision => collision.gameObject.CompareTag("Shark"))
+                .Select(collision => collision.gameObject.GetComponent<WhiteShark>())
+                .Subscribe(whiteShark => health.Value -= WhiteShark.AttackValue);
+            health.Where(value => value <= 0).Subscribe(_ => scoreController.AddScore(10));
         }
 
         
