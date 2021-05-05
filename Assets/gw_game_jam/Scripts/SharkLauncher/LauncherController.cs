@@ -4,7 +4,7 @@ namespace gw_game_jam.Scripts.SharkLauncher
 {
     public class LauncherController : MonoBehaviour
     {
-        [SerializeField] private GameObject shark;
+        [SerializeField] private WhiteShark shark;
         [SerializeField] private GameObject launchPoint;
         
         private void Update()
@@ -22,8 +22,8 @@ namespace gw_game_jam.Scripts.SharkLauncher
 
         private void LaunchShark()
         {
-            GameObject instantiateShark = Instantiate(shark, launchPoint.transform.position, launchPoint.transform.rotation);
-            instantiateShark.GetComponent<Rigidbody>().AddForce(launchPoint.transform.forward * 10, ForceMode.Impulse);
+            WhiteShark instantiateShark = Instantiate(shark, launchPoint.transform.position, launchPoint.transform.rotation);
+            instantiateShark.AddForce(launchPoint.transform.forward * 10);
         }
     }
 }
