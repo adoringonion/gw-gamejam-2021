@@ -25,6 +25,7 @@ namespace gw_game_jam.Scripts.SharkLauncher
             instantiateShark.OnHitAsync.Subscribe(_ => AddScore());
         }
 
+        
         private static void AddScore()
         {
             ScoreController.instance.scoreSubject.OnNext(10);

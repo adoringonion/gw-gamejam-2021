@@ -12,13 +12,13 @@ namespace gw_game_jam.Scripts.SharkLauncher
 
         public IObservable<Unit> OnHitAsync => hitSubject;
 
-
-
+        
         private void Awake()
         {
             rigidBody = gameObject.GetComponent<Rigidbody>();
         }
 
+        
         private void Start()
         {
             gameObject.OnCollisionEnterAsObservable().Where(collision => collision.gameObject.CompareTag("ZombieBoat"))
@@ -35,11 +35,13 @@ namespace gw_game_jam.Scripts.SharkLauncher
             ).AddTo(this);
         }
 
+        
         public void AddForce(Vector3 vec)
         {
             rigidBody.AddForce(vec, ForceMode.Impulse);
         }
 
+        
         private void OnDestroy()
         {
            hitSubject.Dispose(); 
