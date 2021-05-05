@@ -1,4 +1,5 @@
 using System;
+using gw_game_jam.Scripts.Score;
 using UniRx;
 using UnityEngine;
 
@@ -8,20 +9,25 @@ namespace gw_game_jam.Scripts.SharkLauncher
     {
         [SerializeField] private WhiteShark shark;
         [SerializeField] private GameObject launchPoint;
-        [SerializeField] private ScoreController scoreController = ScoreController.instance;
 
         private void Awake()
         {
             Observable.EveryUpdate().Where(_ => Input.GetKeyDown(KeyCode.Space))
-                .ThrottleFirst(TimeSpan.FromSeconds(0.5)).Subscribe(_ =>  LaunchShark());
+                .ThrottleFirst(TimeSpan.FromSeconds(0.5)).Subscribe(_ => LaunchShark());
         }
 
 
         private void LaunchShark()
         {
-            WhiteShark instantiateShark = Instantiate(shark, launchPoint.transform.position, launchPoint.transform.rotation);
+            WhiteShark instantiateShark =
+                Instantiate(shark, launchPoint.transform.position, launchPoint.transform.rotation);
             instantiateShark.AddForce(launchPoint.transform.forward * 10);
-            instantiateShark.OnHitAsync.Take(1).Subscribe(_ => Debug.Log("ゾンビ倒した"));
+            instantiateShark.OnHitAsync.Subscribe(_ => AddScore());
+        }
+
+        private static void AddScore()
+        {
+            ScoreController.instance.scoreSubject.OnNext(10);
         }
     }
 }

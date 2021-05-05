@@ -10,7 +10,7 @@ namespace gw_game_jam.Scripts.SharkLauncher
         private Rigidbody rigidBody;
         private readonly Subject<Unit> hitSubject = new Subject<Unit>();
 
-        public IObservable<Unit> OnHitAsync => hitSubject.Take(1);
+        public IObservable<Unit> OnHitAsync => hitSubject;
 
 
 
