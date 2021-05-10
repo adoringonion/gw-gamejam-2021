@@ -1,29 +1,29 @@
+using System;
+using gw_game_jam.Scripts.Score;
+using UniRx;
 using UnityEngine;
 
 namespace gw_game_jam.Scripts.SharkLauncher
 {
     public class LauncherController : MonoBehaviour
     {
-        [SerializeField] private GameObject shark;
+        [SerializeField] private WhiteShark shark;
         [SerializeField] private GameObject launchPoint;
-        
-        private void Update()
+
+        private void Awake()
         {
-            TestInput();
+            Observable.EveryUpdate().Where(_ => Input.GetKeyDown(KeyCode.Space))
+                .ThrottleFirst(TimeSpan.FromSeconds(0.5)).Subscribe(_ => LaunchShark());
         }
 
-        private void TestInput()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                LaunchShark();
-            }
-        }
 
         private void LaunchShark()
         {
-            GameObject instantiateShark = Instantiate(shark, launchPoint.transform.position, launchPoint.transform.rotation);
-            instantiateShark.GetComponent<Rigidbody>().AddForce(launchPoint.transform.forward * 10, ForceMode.Impulse);
+            IPlayerBullet instantiateShark =
+                Instantiate(shark, launchPoint.transform.position, launchPoint.transform.rotation);
+            instantiateShark.AddForce(launchPoint.transform.forward * 10);
         }
+
+        
     }
 }
