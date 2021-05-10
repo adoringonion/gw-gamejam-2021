@@ -1,21 +1,28 @@
 using System;
+using gw_game_jam.Scripts.Enemy;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 
 namespace gw_game_jam.Scripts.SharkLauncher
 {
-    public class WhiteShark : MonoBehaviour
+    public class WhiteShark : MonoBehaviour, IPlayerBullet
     {
         private Rigidbody rigidBody;
 
-        public static int AttackValue => 10;
+        private int attackValue = 10;
 
         private void Awake()
         {
             rigidBody = gameObject.GetComponent<Rigidbody>();
-            this.OnCollisionEnterAsObservable().Where(collision => !collision.gameObject.CompareTag("Shark"))
-                .Subscribe(_ => Destroy(gameObject)).AddTo(this);
+            this.OnCollisionEnterAsObservable().Where(collision => collision.gameObject.CompareTag("Enemy"))
+                .Select(collision => collision.gameObject.GetComponent<IEnemy>())
+                .Subscribe(enemy =>
+                {
+                    enemy.SetDamage(attackValue);
+                    Destroy(gameObject);
+                }).AddTo(this);
+            
             Observable.Interval(TimeSpan.FromSeconds(3)).Subscribe(_ =>
                 Destroy(gameObject)
             ).AddTo(this);

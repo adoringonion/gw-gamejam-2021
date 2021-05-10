@@ -19,7 +19,7 @@ namespace gw_game_jam.Scripts.SharkLauncher
 
         private void LaunchShark()
         {
-            WhiteShark instantiateShark =
+            IPlayerBullet instantiateShark =
                 Instantiate(shark, launchPoint.transform.position, launchPoint.transform.rotation);
             instantiateShark.AddForce(launchPoint.transform.forward * 10);
         }

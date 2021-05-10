@@ -5,7 +5,7 @@ namespace gw_game_jam.Scripts.Score
 {
     public class ScoreController : MonoBehaviour
     {
-        private Subject<int> scoreSubject;
+        private static Subject<int> scoreSubject;
 
         private static ScoreController instance;
 
@@ -30,7 +30,7 @@ namespace gw_game_jam.Scripts.Score
             scoreSubject.Subscribe(point => currentScore += point);
         }
 
-        public void AddScore(int score)
+        public static void AddScore(int score)
         {
             scoreSubject.OnNext(score);
         }
