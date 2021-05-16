@@ -8,8 +8,10 @@ namespace gw_game_jam.Scripts.SharkLauncher
 {
     public class WhiteShark : MonoBehaviour, IPlayerBullet
     {
-        private Rigidbody rigidBody;
 
+        [SerializeField] private GameObject bombEffectPrefab;
+        
+        private Rigidbody rigidBody;
         private int attackValue = 10;
 
         private void Awake()
@@ -20,12 +22,23 @@ namespace gw_game_jam.Scripts.SharkLauncher
                 .Subscribe(enemy =>
                 {
                     enemy.SetDamage(attackValue);
-                    Destroy(gameObject);
+                    Death();
                 }).AddTo(this);
             
             Observable.Interval(TimeSpan.FromSeconds(3)).Subscribe(_ =>
-                Destroy(gameObject)
+                Death()
             ).AddTo(this);
+        }
+
+
+        private void Death()
+        {
+            for (var i = 0; i < UnityEngine.Random.Range(0, 4); ++i)
+            {
+                var obj = Instantiate(bombEffectPrefab);
+                obj.transform.SetPositionAndRotation(transform.position + UnityEngine.Random.insideUnitSphere, Quaternion.identity);
+            }
+            Destroy(gameObject);
         }
 
         
@@ -33,5 +46,7 @@ namespace gw_game_jam.Scripts.SharkLauncher
         {
             rigidBody.AddForce(vec, ForceMode.Impulse);
         }
+        
+        
     }
 }

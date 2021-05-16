@@ -9,6 +9,7 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = System.Random;
 
 
 namespace gw_game_jam.Enemy
@@ -20,9 +21,10 @@ namespace gw_game_jam.Enemy
     public class ZombieBoat : MonoBehaviour, IEnemy
     {
         private const float NextTargetChangeDistance = 3f;
-        private const int HealthValue = 30;
+        private const int HealthValue = 1;
         private const int Score = 10;
 
+        [SerializeField] private GameObject bombEffectPrefab;
 
         private Queue<Vector3> targetPositions;
         private NavMeshAgent agent;
@@ -71,6 +73,13 @@ namespace gw_game_jam.Enemy
         private void Death()
         {
             ScoreController.AddScore(Score);
+
+            for (var i = 0; i < UnityEngine.Random.Range(0, 4); ++i)
+            {
+                var obj = Instantiate(bombEffectPrefab);
+                obj.transform.SetPositionAndRotation(transform.position + (UnityEngine.Random.insideUnitSphere * 3f), Quaternion.identity);
+            }
+
             Destroy(gameObject);
         }
     }

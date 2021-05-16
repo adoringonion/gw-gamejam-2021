@@ -1021,3 +1021,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f993be4255ebf434e819869df6e187b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bombEffectPrefab: {fileID: 6601926934078282469, guid: bd4a87061672d89439ce88f2f36dce88, type: 3}
