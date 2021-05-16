@@ -33,7 +33,7 @@ namespace gw_game_jam.Scripts.SharkLauncher
 
         private void Death()
         {
-            for (var i = 0; i < UnityEngine.Random.Range(0, 4); ++i)
+            for (var i = 0; i < UnityEngine.Random.Range(1, 4); ++i)
             {
                 var obj = Instantiate(bombEffectPrefab);
                 obj.transform.SetPositionAndRotation(transform.position + UnityEngine.Random.insideUnitSphere, Quaternion.identity);
