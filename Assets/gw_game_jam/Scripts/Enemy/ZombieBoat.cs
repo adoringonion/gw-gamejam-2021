@@ -43,6 +43,15 @@ namespace gw_game_jam.Enemy
         
         private void Update()
         {
+            UpdateAgent();
+        }
+        
+
+        private void UpdateAgent()
+        {
+            // isStopped でブロックしようとしても止まらんかったので null 代入で対応.
+            if (agent == null) return;
+            
             if (agent.remainingDistance <= NextTargetChangeDistance)
             {
                 if (0 < targetPositions.Count)
@@ -72,8 +81,10 @@ namespace gw_game_jam.Enemy
 
         private void Death()
         {
+            // なんかと止める方法が無かった.
+            agent = null;
+            
             ScoreController.AddScore(Score);
-
             for (var i = 0; i < UnityEngine.Random.Range(0, 4); ++i)
             {
                 var obj = Instantiate(bombEffectPrefab);
