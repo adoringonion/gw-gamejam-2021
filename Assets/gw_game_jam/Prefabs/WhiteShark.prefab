@@ -956,6 +956,7 @@ GameObject:
   - component: {fileID: 54219139490038002}
   - component: {fileID: 136919212424326810}
   - component: {fileID: 5008407850945972803}
+  - component: {fileID: -6908995099749316840}
   m_Layer: 0
   m_Name: WhiteShark
   m_TagString: Player Bullet
@@ -970,8 +971,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1953569645472248}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.70710665, y: -0, z: -0, w: 0.70710695}
+  m_LocalPosition: {x: 0, y: 20.738148, z: -0.19900575}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4556214459675478}
@@ -1022,3 +1023,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bombEffectPrefab: {fileID: 6601926934078282469, guid: bd4a87061672d89439ce88f2f36dce88, type: 3}
+--- !u!95 &-6908995099749316840
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953569645472248}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ae4496d0729534549bdf93aa61c44716, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

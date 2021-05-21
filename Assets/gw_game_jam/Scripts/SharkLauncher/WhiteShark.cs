@@ -1,13 +1,17 @@
 using System;
-using gw_game_jam.Scripts.Enemy;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UniRx;
 using UniRx.Triggers;
-using UnityEngine;
+
+using gw_game_jam.Scripts.Enemy;
 
 namespace gw_game_jam.Scripts.SharkLauncher
 {
     public class WhiteShark : MonoBehaviour, IPlayerBullet
     {
+        private const float ToDefaultScaleTime = 1f;
+        
 
         [SerializeField] private GameObject bombEffectPrefab;
         
@@ -28,6 +32,8 @@ namespace gw_game_jam.Scripts.SharkLauncher
             Observable.Interval(TimeSpan.FromSeconds(3)).Subscribe(_ =>
                 Death()
             ).AddTo(this);
+
+            ToDefaultScale().Forget();
         }
 
 
@@ -41,7 +47,26 @@ namespace gw_game_jam.Scripts.SharkLauncher
             Destroy(gameObject);
         }
 
-        
+
+         /// <summary>
+         /// サメの拡大率を徐々に1.0にしていく.
+         /// </summary>
+         /// <returns></returns>
+        private async UniTask ToDefaultScale()
+        {
+            float scale = 0.1f;
+            float timeCount = 0f;
+            transform.localScale = Vector3.one * scale;
+            while (scale < 1f)
+            {
+                timeCount += Time.deltaTime;
+                scale = timeCount / ToDefaultScaleTime; 
+                transform.localScale = (scale < 1f) ? Vector3.one * scale : Vector3.one;
+                await UniTask.DelayFrame(1);
+            }
+        }
+
+
         public void AddForce(Vector3 vec)
         {
             rigidBody.AddForce(vec, ForceMode.Impulse);

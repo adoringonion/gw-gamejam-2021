@@ -51,7 +51,7 @@ namespace gw_game_jam.Systems
             RequestPlayBattleBgm();
 
             // TODO : とりあえず今はこう、後でメインシーン操作用スクリプトから操作するようにする.
-            Observable.Timer(TimeSpan.FromMilliseconds(10 * 1000)).Subscribe(_ => RequestStopBattleBgm());
+            //Observable.Timer(TimeSpan.FromMilliseconds(10 * 1000)).Subscribe(_ => RequestStopBattleBgm());
         }
 
 
