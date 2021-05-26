@@ -1,18 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UniRx;
+using UniRx.Triggers;
 
-public class TitleScene : MonoBehaviour
+namespace gw_game_jam.Scene
 {
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>
+    /// Titleシーン.
+    /// </summary>
+    public class TitleScene : MonoBehaviour
     {
+        // Start is called before the first frame update
+        private void Start()
+        {
+            /*
+            this.UpdateAsObservable().Where(_ => OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
+                .ThrottleFirst(TimeSpan.FromSeconds(0.5)).Subscribe(_ => launcherController.Fire()).AddTo(this);
+            */
+            this.UpdateAsObservable().Where(_ => Input.GetKeyDown(KeyCode.Space) || OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
+                .ThrottleFirst(TimeSpan.FromSeconds(0.5)).Subscribe(_ => SceneManager.LoadScene("main")).AddTo(this);
+        }
         
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void Update()
+        {
+        }
     }
 }
